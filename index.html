@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Fruit Shop Catalog</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400&display=swap');
+
+        body {
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 5px solid #ffc0cb;
+            position: relative;
+        }
+        .container:before, .container:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('ribbon.png') no-repeat center center;
+            background-size: contain;
+        }
+        .container:before {
+            top: -25px;
+            left: -25px;
+        }
+        .container:after {
+            bottom: -25px;
+            right: -25px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff69b4;
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5em;
+            font-weight: bold;
+            position: relative;
+            background-color: #ECEE81;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        h1:before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: -25px;
+            width: 40px;
+            height: 40px;
+            background: url('paperclip.png') no-repeat center center;
+            background-size: contain;
+        }
+        h1:after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 50px;
+            height: 50px;
+            background: url('ribbon_sticker.png') no-repeat center center;
+            background-size: contain;
+        }
+        h1:before, h1:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('star.png') no-repeat center center;
+            background-size: contain;
+        }
+        h1:before {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        h1:after {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .fruit {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .fruit-item {
+            width: 200px;
+            margin: 10px;
+            padding: 10px;
+            background-color: #EDB7ED;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px solid #ffc0cb;
+        }
+        .fruit-item img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 5px solid #ff69b4;
+        }
+        .fruit-item h3 {
+            margin-top: 10px;
+            color: #82A0D8;
+        }
+        .fruit-item p {
+            color: #82A0D8;
+        }
+        .order-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8DDFCB;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        .order-btn:hover {
+            background-color: #82A0D8;
+        }
+        .cart, .customer-info, .payment-method {
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ECEE81;
+            margin-bottom: 20px;
+        }
+        .cart:before, .cart:after,
+        .customer-info:before, .customer-info:after,
+        .payment-method:before, .payment-method:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+        }
+        .cart:before, .cart:after {
+            background: url('cart_element.png') no-repeat center center;
+        }
+        .cart:before {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .cart:after {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .customer-info:before, .customer-info:after {
+            background: url('info_element.png') no-repeat center center;
+        }
+        .customer-info:before {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .customer-info:after {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .payment-method:before, .payment-method:after {
+            background: url('payment_element.png') no-repeat center center;
+        }
+        .payment-method:before {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .payment-method:after {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .cart-items {
+            margin-bottom: 10px;
+        }
+        .total-cost {
+            font-weight: bold;
+            color: #82A0D8;
+        }
+        .customer-info input, .payment-method select {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            border: 2px solid #82A0D8;
+            border-radius: 10px;
+        }
+        .payment-method select {
+            background-color: #8DDFCB;
+            color: #82A0D8;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #EDB7ED;
+            text-align: center;
+            border-radius: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .footer img {
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Angelite's Fancies</h1>
+        <div class="fruit">
+            <div class="fruit-item">
+                <img src="apple.jpg" alt="Apple">
+                <h3>Apple</h3>
+                <p class="price">$1.00</p>
+                <button class="order-btn" onclick="addToCart('Apple', 1.00)">Add to Cart</button>
+            </div>
+            <div class="fruit-item">
+                <img src="banana.jpg" alt="Banana">
+                <h3>Banana</h3>
+                <p class="price">$0.75</p>
+                <button class="order-btn" onclick="addToCart('Banana', 0.75)">Add to Cart</button>
+            </div>
+            <div class="fruit-item">
+                <img src="orange.jpg" alt="Orange">
+                <h3>Orange</h3>
+                <p class="price">$0.80</p>
+                <button class="order-btn" onclick="addToCart('Orange', 0.80)">Add to Cart</button>
+            </div>
+			<div class="fruit-item">
+                <img src="strawberry.jpg" alt="Strawberry">
+                <h3>Strawberry</h3>
+                <p class="price">$0.90</p>
+                <button class="order-btn" onclick="addToCart('Strawberry', 0.90)">Add to Cart</button>
+            </div>
+			<div class="fruit-item">
+                <img src="durian.jpg" alt="Durian">
+                <h3>Duren Anjayh Mabar</h3>
+                <p class="price">$555.555</p>
+                <button class="order-btn" onclick="addToCart('Durian', 555.555)">Add to Cart</button>
+            </div>
+			<div class="fruit-item">
+                <img src="watermelon.jpg" alt="Watermelon">
+                <h3>Watermelon</h3>
+                <p class="price">$3.00</p>
+                <button class="order-btn" onclick="addToCart('Watermelon', 3.00)">Add to Cart</button>
+            </div>
+            <div class="fruit-item">
+                <img src="cherimoya.jpg" alt="Cherimoya">
+                <h3>Cherimoya</h3>
+                <p class="price">$2.00</p>
+                <button class="order-btn" onclick="addToCart('Cherimoya', 2.00)">Add to Cart</button>
+            </div>
+			<div class="fruit-item">
+                <img src="cherry.jpg" alt="Cherry">
+                <h3>Cherry</h3>
+                <p class="price">$3.50</p>
+                <button class="order-btn" onclick="addToCart('Cherry', 3.50)">Add to Cart</button>
+            </div>
+			<div class="fruit-item">
+                <img src="pear.jpg" alt="Pear">
+                <h3>Pear</h3>
+                <p class="price">$1.25</p>
+                <button class="order-btn" onclick="addToCart('Pear', 1.25)">Add to Cart</button>
+            </div>
+            <!-- Add more fruit items as needed -->
+        </div>
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be displayed here -->
+            </div>
+            <button class="order-btn" onclick="calculateTotal()">Calculate Total</button>
+            <p class="total-cost">Total Cost: $<span id="totalCost">0.00</span></p>
+        </div>
+        <div class="customer-info">
+            <h2>Customer Information</h2>
+            <input type="text" id="customerName" placeholder="Your Name">
+            <input type="text" id="customerCountry" placeholder="Country">
+            <input type="text" id="customerPostCode" placeholder="Post Code">
+        </div>
+        <div class="payment-method">
+            <h2>Payment Method</h2>
+            <select id="paymentSelect">
+                <option value="credit">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank">Bank Transfer</option>
+            </select>
+        </div>
+        <div class="footer">
+            <img src="phone.png" alt="Phone">
+            Contact Person: Angel Wiranata XI-1
+        </div>
+    </div>
+
+    <script>
+        // JavaScript functions to handle cart functionality
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            displayCart();
+        }
+
+        function displayCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cart.forEach((cartItem, index) => {
+                cartItems.innerHTML += `<p>${cartItem.item} - $${cartItem.price.toFixed(2)} <button onclick="removeFromCart(${index})">Remove</button></p>`;
+            });
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            displayCart();
+        }
+
+        function calculateTotal() {
+            const totalCost = cart.reduce((total, item) => total + item.price, 0);
+            document.getElementById('totalCost').innerText = totalCost.toFixed(2);
+        }
+    </script>
+</body>
+</html>
