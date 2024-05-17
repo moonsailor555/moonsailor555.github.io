@@ -224,6 +224,24 @@
             height: 24px;
             margin-right: 10px;
         }
+        .confirmOrder {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8DDFCB;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Baloo 2', cursive;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .confirmOrder:hover {
+            background-color: #82A0D8;
+        }
     </style>
 </head>
 <body>
@@ -307,6 +325,7 @@
                 <option value="liver">Ur Friend's Liver</option>
                 <option value="bank">Bank Transfer</option>
             </select>
+			<button class="confirmOrder" onclick="confirmOrder()">Confirm Order</button>
         </div>
         <div class="footer">
             <img src="phone.png" alt="Phone">
@@ -339,6 +358,10 @@
         function calculateTotal() {
             const totalCost = cart.reduce((total, item) => total + item.price, 0);
             document.getElementById('totalCost').innerText = totalCost.toFixed(2);
+        }
+		
+		function confirmOrder() {
+            alert("Your order has been confirmed, thanks for purchasing!");
         }
     </script>
 </body>
